@@ -39,21 +39,7 @@
       text-align: center;
       text-decoration: none;
     }
-    /* modal (overlay e caixa) */.modal-overlay {
-    position: fixed;
-    top:0; left:0; width:100vw; height:100vh;
-    background: rgba(0,0,0,0.6);
-    display: flex; align-items:center; justify-content:center;
-    z-index: 10002;}.modal-box {
-    background: #fff; padding: 24px; border-radius: 8px;
-    max-width: 320px; width: 90%;
-    text-align: center; position: relative;}.modal-close {
-    position: absolute; top:8px; right:8px;
-    background:transparent; border:none; font-size:1.4rem; cursor:pointer;}.modal-btn {
-    display: block; width:100%; margin:12px 0;
-    padding:10px; border: none; border-radius:6px;
-    font-weight:600; cursor:pointer;}#testeUnitv { background: #28a745; color:#fff; }#testeTvexpress{ background: #5f0a87; color:#fff; }/* classe para esconder */.hidden { display: none; }
-
+    
     /* BARRA DE URGÊNCIA FIXA (MOBILE) */
     .urgencia-bar { display: none; }
     @media (max-width: 800px) {
@@ -222,7 +208,6 @@
     .cta-button img.btn-logo { width:38px; }
     .cta-button:hover { opacity:.85; transform:translateY(-2px); }
     .cta-unitv { background:linear-gradient(45deg,#4c60c0,#e5343d); }
-    .cta-tvexpress { background:linear-gradient(45deg,#5f0a87,#a4508b); }
     .trust-section {
       display:flex; justify-content:center;
       gap:2rem; flex-wrap:wrap; padding:40px 0;
@@ -288,10 +273,6 @@
     .accordion-header.banner-header{
       background:var(--red)!important; color:var(--white)!important;
       justify-content:center;
-    }
-    .accordion-header.banner-header-tvexpress{
-      background:linear-gradient(45deg,#5f0a87,#a4508b)!important;
-      color:var(--white)!important; justify-content:center;
     }
     .accordion-header.active{background:var(--bg-header-active);}
     .accordion-header .icon{transition:transform .25s; font-size:.9rem;}
@@ -422,129 +403,49 @@
     ⏳ Restam apenas <b>4 testes grátis</b> hoje! Corre ativar agora!
   </div>
 
-<div id="dobra-teste-gratis"
-     style="background:#000; color:#fff; padding:20px 15px; text-align:center; font-family:'Montserrat',Arial,sans-serif;">
-  <h1 style="margin-bottom:8px; font-size:1.6rem;">
-    🔥 Recarga Oficial 🔥
-  </h1><a href="#planos-unitv"
-     style="background:#ff6600; color:#111; padding:12px 28px; border-radius:8px;
-            font-weight:600; text-decoration:none; display:inline-block;
-            margin:6px 8px 0; transition:background .2s, transform .15s;"
-     onmouseover="this.style.background='#e65500';"
-     onmouseout="this.style.background='#ff6600';">
-    🛒 COMPRAR AGORA COM DESCONTO
-  </a>
-
-  <div style="margin-top:16px;
-              display:flex;
-              justify-content:center;
-              align-items:center;
-              gap:16px;">
-    <img src="images/unitv.png" alt="UniTV"
-         style="width:80px; height:auto;">
-    <img src="images/tvexpress.png" alt="TV Express"
-         style="width:80px; height:auto;">
-  </div></div>
-
-<div id="modalTeste"
-     style="position:fixed;top:0;left:0;width:100vw;height:100vh;
-            background:rgba(0,0,0,0.6);display:none;
-            align-items:center;justify-content:center;z-index:10002;">
-  <div style="background:#fff;
-              padding:24px;
-              border-radius:8px;
-              max-width:320px;
-              width:90%;
-              text-align:center;
-              position:relative;
-              font-family:Montserrat,Arial,sans-serif;"
-  >
-    <button onclick="document.getElementById('modalTeste').style.display='none';"
-            style="position:absolute;top:8px;right:8px;
-                   background:transparent;border:none;
-                   font-size:1.4rem;cursor:pointer;">
-      &times;
-    </button>
-
-    <h2 style="margin-bottom:16px;font-size:1.2rem;color:#222;">
-      Qual teste você quer ativar?
-    </h2>
-
-    <button id="testeUnitv"
-            style="display:block;
-                   width:100%;
-                   padding:12px 0;
-                   margin-bottom:12px;
-                   border:none;
-                   border-radius:6px;
-                   background:#28a745;
-                   color:#fff;
-                   font-size:1rem;
-                   font-weight:600;
-                   cursor:pointer;
-                   line-height:1.3;"
-    >
-      Teste UniTV<br>
-      <small style="font-size:0.85rem;color:#f0f0f0;">
-        3 dias grátis
-      </small>
-    </button>
-
-    <button id="testeTvexpress"
-            style="display:block;
-                   width:100%;
-                   padding:12px 0;
-                   border:none;
-                   border-radius:6px;
-                   background:#5f0a87;
-                   color:#fff;
-                   font-size:1rem;
-                   font-weight:600;
-                   cursor:pointer;
-                   line-height:1.3;"
-    >
-      Teste TV Express<br>
-      <small style="font-size:0.85rem;color:#f0f0f0;">
-        7 dias grátis
-      </small>
-    </button>
-  </div></div>
+  <div id="dobra-teste-gratis">
+    <h1>🔥 Recarga UniTV Oficial 🔥</h1>
+    <a href="#planos-unitv" class="btn-comprar">
+      🛒 COMPRAR AGORA COM DESCONTO
+    </a>
+    <div style="margin-top:16px; display:flex; justify-content:center;">
+      <img src="images/unitv.png" alt="UniTV" style="width:80px; height:auto;">
+    </div>
+  </div>
 
   <header>
     <div class="container">
       <nav>
         <ul>
           <li><a href="#planos-unitv">Planos UniTV</a></li>
-          <li><a href="#planos-tvexpress">Planos TV Express</a></li>
           <li><a href="#faq">Como Instalar</a></li>
         </ul>
       </nav>
     </div>
   </header>
+  
   <section class="top-banner"></section>
 
   <section class="hero">
     <div class="container">
       <div class="hero-text">
-        <h1 class="hero-heading">Os APPs Mais Seguros e Estáveis do Brasil</h1>
-        <p class="hero-lead">Aproveite a melhor experiência cinematográfica a qualquer hora e em qualquer lugar</p><a href="#planos-unitv"
-   style="
-    background: #25D366;
-    display: table;
-    margin: 20px auto;
-    padding: 14px 28px;
-    border-radius: 6px;
-    color: #ffffff;
-    font-weight: 600;
-    text-decoration: none;
-    text-align: center;
-    font-family: 'Montserrat', Arial, sans-serif;
-    transition: background .2s, transform .15s;
-   "
-   onmouseover="this.style.background='#20ba5a';"
-   onmouseout="this.style.background='#25D366';">
-  COMPRAR AGORA</a>
-
+        <h1 class="hero-heading">O APP Mais Seguro e Estável do Brasil</h1>
+        <p class="hero-lead">Aproveite a melhor experiência cinematográfica a qualquer hora e em qualquer lugar</p>
+        <a href="#planos-unitv" style="
+          background: #25D366;
+          display: table;
+          margin: 20px auto;
+          padding: 14px 28px;
+          border-radius: 6px;
+          color: #ffffff;
+          font-weight: 600;
+          text-decoration: none;
+          text-align: center;
+          font-family: 'Montserrat', Arial, sans-serif;
+          transition: background .2s, transform .15s;
+        " onmouseover="this.style.background='#20ba5a';" onmouseout="this.style.background='#25D366';">
+          COMPRAR AGORA
+        </a>
       </div>
       <div class="hero-img">
         <img src="images/hero-device.png" alt="Dispositivos UniTV" loading="lazy">
@@ -562,7 +463,9 @@
   </section>
 
   <div id="planos-unitv" class="container">
-    <div class="section-header-wrapper"><span class="section-title">PLANOS PRINCIPAIS</span></div>
+    <div class="section-header-wrapper">
+      <span class="section-title">PLANOS UNITV</span>
+    </div>
     <div class="divider"></div>
     <div class="cards">
       <div class="card">
@@ -605,187 +508,86 @@
     <path d="M0,100 C300,0 900,200 1200,100 L1200,100 L0,100 Z"></path>
   </svg>
 
-  <div id="planos-tvexpress" class="container">
-    <div class="section-header-wrapper"><span class="section-title">MAIS PLANOS DISPONÍVEIS</span></div>
-    <div class="divider"></div>
-    <div class="cards">
-      <div class="card">
-        <img src="images/card4.jpeg" alt="TV Express Mensal">
-        <div class="card-body">
-          <div class="card-rating">★★★★★</div>
-          <div class="card-title">TV EXPRESS<br>30 DIAS</div>
-          <div class="card-old">R$ 30,90</div>
-          <div class="card-discount">-25%</div>
-          <div class="card-price">R$ 22,90</div>
-          <a href="checkout-tvexpress-30-dias.html" class="btn">COMPRAR AGORA</a>
-        </div>
-      </div>
-      <div class="card">
-        <img src="images/card5.jpeg" alt="TV Express Anual">
-        <div class="card-body">
-          <div class="card-rating">★★★★★</div>
-          <div class="card-title">TV EXPRESS<br>365 DIAS</div>
-          <div class="card-old">R$ 230,90</div>
-          <div class="card-discount">-35%</div>
-          <div class="card-price">R$ 149,90</div>
-          <a href="checkout-tvexpress-365-dias.html" class="btn">COMPRAR AGORA</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <svg class="separator-svg" viewBox="0 0 1200 100" preserveAspectRatio="none">
-    <path d="M0,100 C300,0 900,200 1200,100 L1200,100 L0,100 Z"></path>
-  </svg>
-
   <section id="faq" class="accordion">
-  <div class="accordion-item">
-    <div class="accordion-header banner-header">PASSO A PASSO – UniTV</div>
-  </div>
-  <div class="accordion-item">
-    <div class="accordion-header"><span>Como instalar o UniTV pelo Downloader</span><span class="icon">▶</span></div>
-    <div class="accordion-content">
-      <ol>
-        <li>Instale o app <strong>Downloader By AFTVnews</strong> (Appstore → Pesquisar).</li>
-        <li>Abra o Downloader, digite o código <strong>747257</strong> e baixe o APP.</li>
-        <li>Siga as instruções na tela para concluir.</li>
-        <li>Aceite todas as permissões.</li>
-        <li>Abra o UniTV para prosseguir.</li>
-      </ol>
+    <div class="accordion-item">
+      <div class="accordion-header banner-header">PASSO A PASSO – UniTV</div>
     </div>
-  </div>
-  <div class="accordion-item">
-    <div class="accordion-header"><span>Como inserir o código UNITV</span><span class="icon">▶</span></div>
-    <div class="accordion-content">
-      <ol>
-        <li>Abra o app e vá em <strong>Perfil</strong>.</li>
-        <li>Antes de tudo vincule seu E-mail ou seu Telefone <strong>(Para não Perder seu Código)</strong>.</li>
-        <li>Clique em <strong>Centro de Resgate</strong>.</li>
-        <li>Digite o código mensal. Se for código trimestral, insira em sequência.</li>
-        <li>Aguarde confirmação de cada inserção.</li>
-      </ol>
-      <video src="videos/codigounivideo.mp4" controls style="display:block;width:100%;max-width:600px;margin:16px auto;border-radius:var(--radius);box-shadow:0 3px 8px rgba(0,0,0,0.15);"></video>
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>Como instalar o UniTV pelo Downloader</span>
+        <span class="icon">▶</span>
+      </div>
+      <div class="accordion-content">
+        <ol>
+          <li>Instale o app <strong>Downloader By AFTVnews</strong> (Appstore → Pesquisar).</li>
+          <li>Abra o Downloader, digite o código <strong>747257</strong> e baixe o APP.</li>
+          <li>Siga as instruções na tela para concluir.</li>
+          <li>Aceite todas as permissões.</li>
+          <li>Abra o UniTV para prosseguir.</li>
+        </ol>
+      </div>
     </div>
-  </div>
-  <div class="accordion-item">
-    <div class="accordion-header"><span>UniTV – Canais Brasileiros e Internacionais</span><span class="icon">▶</span></div>
-    <div class="accordion-content">
-      <ul>
-        <li>Esportes</li>
-        <li>Documentários</li>
-        <li>Filmes e séries</li>
-        <li>Desenhos infantis</li>
-        <li>Notícias</li>
-        <li>Adultos +18</li>
-      </ul>
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>Como inserir o código UNITV</span>
+        <span class="icon">▶</span>
+      </div>
+      <div class="accordion-content">
+        <ol>
+          <li>Abra o app e vá em <strong>Perfil</strong>.</li>
+          <li>Antes de tudo vincule seu E-mail ou seu Telefone <strong>(Para não Perder seu Código)</strong>.</li>
+          <li>Clique em <strong>Centro de Resgate</strong>.</li>
+          <li>Digite o código mensal. Se for código trimestral, insira em sequência.</li>
+          <li>Aguarde confirmação de cada inserção.</li>
+        </ol>
+        <video src="videos/codigounivideo.mp4" controls style="display:block;width:100%;max-width:600px;margin:16px auto;border-radius:var(--radius);box-shadow:0 3px 8px rgba(0,0,0,0.15);"></video>
+      </div>
     </div>
-  </div>
-  <div class="accordion-item">
-    <div class="accordion-header"><span>Filmes & Séries à vontade</span><span class="icon">▶</span></div>
-    <div class="accordion-content">
-      <ul>
-        <li>Ação</li><li>Aventura</li><li>Suspense</li><li>Terror</li>
-        <li>Policial/Roubos</li><li>Brasileiros</li><li>Comédia</li><li>Romance</li>
-      </ul>
-      <p>Solicite novos títulos na sua <strong>Central do cliente</strong>.</p>
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>UniTV – Canais Brasileiros e Internacionais</span>
+        <span class="icon">▶</span>
+      </div>
+      <div class="accordion-content">
+        <ul>
+          <li>Esportes</li>
+          <li>Documentários</li>
+          <li>Filmes e séries</li>
+          <li>Desenhos infantis</li>
+          <li>Notícias</li>
+          <li>Adultos +18</li>
+        </ul>
+      </div>
     </div>
-  </div>
-  <div class="accordion-item">
-    <div class="accordion-header"><span>Configurar conta e senha</span><span class="icon">▶</span></div>
-    <div class="accordion-content">
-      <ol>
-        <li>Abra o UniTV e acesse <strong>Perfil</strong>.</li>
-        <li>Selecione <strong>Alterar Senha</strong>.</li>
-        <li>Informe senha atual e defina a nova.</li>
-        <li>Toque em <em>Atualizar</em> para salvar.</li>
-      </ol>
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>Filmes & Séries à vontade</span>
+        <span class="icon">▶</span>
+      </div>
+      <div class="accordion-content">
+        <ul>
+          <li>Ação</li><li>Aventura</li><li>Suspense</li><li>Terror</li>
+          <li>Policial/Roubos</li><li>Brasileiros</li><li>Comédia</li><li>Romance</li>
+        </ul>
+        <p>Solicite novos títulos na sua <strong>Central do cliente</strong>.</p>
+      </div>
     </div>
-  </div>
-  <div class="accordion-item">
-    <div class="accordion-header banner-header-tvexpress">PASSO A PASSO – TV Express</div>
-  </div>
-  <div class="accordion-item">
-    <div class="accordion-header"><span>Como instalar o TV Express pelo Downloader</span><span class="icon">▶</span></div>
-    <div class="accordion-content">
-      <ol>
-        <li>Instale o app <strong>Downloader By AFTVnews</strong> (Appstore → Pesquisar).</li>
-        <li>Abra o Downloader, digite o código <strong>970855</strong> e baixe o APP.</li>
-        <li>Siga as instruções na tela para concluir.</li>
-        <li>Aceite todas as permissões.</li>
-        <li>Abra o TV Express para prosseguir.</li>
-      </ol>
+    <div class="accordion-item">
+      <div class="accordion-header">
+        <span>Configurar conta e senha</span>
+        <span class="icon">▶</span>
+      </div>
+      <div class="accordion-content">
+        <ol>
+          <li>Abra o UniTV e acesse <strong>Perfil</strong>.</li>
+          <li>Selecione <strong>Alterar Senha</strong>.</li>
+          <li>Informe senha atual e defina a nova.</li>
+          <li>Toque em <em>Atualizar</em> para salvar.</li>
+        </ol>
+      </div>
     </div>
-  </div>
-  <div class="accordion-item">
-    <div class="accordion-header"><span>Como inserir o código TV Express</span><span class="icon">▶</span></div>
-    <div class="accordion-content">
-      <ol>
-        <li>Vá em <strong>Recarregar</strong> no menu.</li>
-        <li>Selecione <strong>Código de Recarga</strong>.</li>
-        <li>Digite o código e confirme.</li>
-      </ol>
-      <video src="videos/codigounivideoexpress.mp4" controls style="display:block;width:100%;max-width:600px;margin:16px auto;border-radius:var(--radius);box-shadow:0 3px 8px rgba(0,0,0,0.15);"></video>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <div class="accordion-header"><span>Tv Express – Canais Brasileiros e Internacionais</span><span class="icon">▶</span></div>
-    <div class="accordion-content">
-      <ul>
-        <li>Esportes</li>
-        <li>Documentários</li>
-        <li>Filmes e séries</li>
-        <li>Desenhos infantis</li>
-        <li>Notícias</li>
-        <li>Adultos +18</li>
-      </ul>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <div class="accordion-header"><span>Filmes & Séries à vontade</span><span class="icon">▶</span></div>
-    <div class="accordion-content">
-      <ul>
-        <li>Ação</li><li>Aventura</li><li>Suspense</li><li>Terror</li>
-        <li>Policial/Roubos</li><li>Brasileiros</li><li>Comédia</li><li>Romance</li>
-      </ul>
-      <p>Solicite novos títulos na sua <strong>Central do cliente</strong>.</p>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <div class="accordion-header"><span>Configurar conta e senha no TV Express</span><span class="icon">▶</span></div>
-    <div class="accordion-content">
-      <ol>
-        <li>Abra o TV Express e toque em <strong>Perfil</strong>.</li>
-        <li>Selecione <strong>Alterar Senha</strong>.</li>
-        <li>Insira a senha antiga e a nova.</li>
-        <li>Toque em <em>Salvar</em> para confirmar.</li>
-      </ol>
-    </div>
-  </div>
-  <div class="accordion-item">
-    <div class="accordion-header banner-header" style="background: #000 !important;">
-      PASSO A PASSO – XCLOUD
-    </div>
-  </div>
-  <div class="accordion-item">
-    <div class="accordion-header"><span>Como instalar o XCLOUD em sua TV</span><span class="icon">▶</span></div>
-    <div class="accordion-content">
-      <ul style="margin-bottom: 0;">
-        <li>Disponível apenas para marcas <strong>SAMSUNG, LG E ROKU</strong>.</li>
-        <li>
-          Entre na loja de aplicativos da sua SMART TV e, na lupa de pesquisa, digite <strong>XCLOUD</strong>.<br>
-          <img src="images/xcloud.png" alt="App Xcloud" style="display:block;width:110px;max-width:90vw;margin:12px auto 4px auto;border-radius:10px;box-shadow:0 1px 5px rgba(0,0,0,0.13);">
-        </li>
-        <li>Aplicativo com essa imagem acima.</li>
-        <li>
-          Após feita a instalação, basta enviar a foto da <strong>CHAVE DO DISPOSITIVO</strong> do aplicativo (aparece no canto inferior esquerdo da TV) para fazer seu teste grátis.<br>
-          <img src="images/chave.png" alt="Chave do Dispositivo Xcloud" style="display:block;width:250px;max-width:98vw;margin:12px auto 0 auto;border-radius:10px;box-shadow:0 1px 8px rgba(0,0,0,0.13);">
-        </li>
-      </ul>
-    </div>
-  </div>
   </section>
 
-  </section>
   <section class="reviews-section">
     <h2 class="reviews-title">O que dizem nossos clientes</h2>
     <div class="reviews-list">
@@ -793,51 +595,53 @@
         <img src="https://randomuser.me/api/portraits/men/32.jpg" class="review-avatar" alt="Carlos S.">
         <span class="review-name">Carlos S. – Recife/PE</span>
         <div class="review-stars">★★★★★</div>
-        <div class="review-text">“Muito rápido! Comprei e recebi meu código na hora. Atendimento no WhatsApp nota 10.”</div>
+        <div class="review-text">"Muito rápido! Comprei e recebi meu código na hora. Atendimento no WhatsApp nota 10."</div>
         <div class="review-date">há 1 dia</div>
       </div>
       <div class="review-card">
         <img src="https://randomuser.me/api/portraits/women/25.jpg" class="review-avatar" alt="Ana Paula R.">
         <span class="review-name">Ana Paula R. – São Paulo/SP</span>
         <div class="review-stars">★★★★★</div>
-        <div class="review-text">“Amei o UniTV, funciona em todos meus aparelhos! Preço excelente e sempre tem suporte.”</div>
+        <div class="review-text">"Amei o UniTV, funciona em todos meus aparelhos! Preço excelente e sempre tem suporte."</div>
         <div class="review-date">há 3 dias</div>
       </div>
       <div class="review-card">
         <img src="https://randomuser.me/api/portraits/men/45.jpg" class="review-avatar" alt="Pedro Henrique">
         <span class="review-name">Pedro Henrique – Brasília/DF</span>
         <div class="review-stars">★★★★★</div>
-        <div class="review-text">“Já testei vários IPTV mas nenhum igual esse. Recomendo demais, não trava!”</div>
+        <div class="review-text">"Já testei vários IPTV mas nenhum igual esse. Recomendo demais, não trava!"</div>
         <div class="review-date">há 5 dias</div>
       </div>
       <div class="review-card">
         <img src="https://randomuser.me/api/portraits/women/62.jpg" class="review-avatar" alt="Juliana G.">
         <span class="review-name">Juliana G. – Curitiba/PR</span>
         <div class="review-stars">★★★★★</div>
-        <div class="review-text">“Fácil de instalar, imagem perfeita. Equipe sempre ajuda no WhatsApp quando preciso.”</div>
+        <div class="review-text">"Fácil de instalar, imagem perfeita. Equipe sempre ajuda no WhatsApp quando preciso."</div>
         <div class="review-date">há 6 dias</div>
       </div>
       <div class="review-card">
         <img src="https://randomuser.me/api/portraits/men/12.jpg" class="review-avatar" alt="Matheus S.">
         <span class="review-name">Matheus S. – Salvador/BA</span>
         <div class="review-stars">★★★★★</div>
-        <div class="review-text">“O melhor app de todos! Não fico sem. Indiquei para toda minha família.”</div>
+        <div class="review-text">"O melhor app de todos! Não fico sem. Indiquei para toda minha família."</div>
         <div class="review-date">há 1 semana</div>
       </div>
     </div>
   </section>
+
   <footer class="footer">
     <div class="footer-columns">
       <div class="footer-col">
         <h4>Recargas</h4>
         <ul>
           <li><a href="#planos-unitv">Planos UniTV</a></li>
-          <li><a href="#planos-tvexpress">Planos TV Express</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Como Instalar</h4>
-        <li><a href="policitasdevolucao.html">Política de Devolução</a></li>
+        <ul>
+          <li><a href="policitasdevolucao.html">Política de Devolução</a></li>
+        </ul>
       </div>
       <div class="footer-col">
         <h4>Suporte</h4>
@@ -854,7 +658,7 @@
         </ul>
       </div>
     </div>
-    <div class="footer-copy">© 2025 Recarga UniTV EXPRESS — Todos os direitos reservados.</div>
+    <div class="footer-copy">© 2025 Recarga UniTV — Todos os direitos reservados.</div>
   </footer>
 
   <div id="popup-container"></div>
@@ -863,7 +667,7 @@
     // Accordion: apenas um aberto por vez
     document.querySelectorAll('.accordion-header').forEach(h => {
       h.addEventListener('click', () => {
-        if (h.classList.contains('banner-header') || h.classList.contains('banner-header-tvexpress')) return;
+        if (h.classList.contains('banner-header')) return;
         const content = h.nextElementSibling;
         const isOpen = h.classList.contains('active');
         document.querySelectorAll('.accordion-header').forEach(x => x.classList.remove('active'));
@@ -874,6 +678,7 @@
         }
       });
     });
+    
     // Red-glow nos botões ao aparecer na viewport
     const obs = new IntersectionObserver((entries, obsr) => {
       entries.forEach(e => {
@@ -887,6 +692,7 @@
   </script>
 
   <script>
+    // WhatsApp floating button
     (function() {
       fetch('get_whatsapp.php')
         .then(r => r.json())
@@ -894,7 +700,7 @@
           var num = data.whatsapp;
           if (!num) return;
           var wBtn = document.createElement('a');
-          wBtn.href = 'https://wa.me/' + num + '?text=Olá%2C+gostaria+de+falar+com+o+suporte+da+UniTVEXPRESS';
+          wBtn.href = 'https://wa.me/' + num + '?text=Olá%2C+gostaria+de+falar+com+o+suporte+da+UniTV';
           wBtn.target = '_blank';
           wBtn.className = 'whatsapp-float-btn';
           wBtn.innerHTML =
@@ -940,98 +746,81 @@
           document.head.appendChild(css);
         });
     })();
-      </script>
+  </script>
 
   <script>
+    // Popup notifications - versão melhorada
     async function loadMessages() {
       try {
         const response = await fetch('/mensagens.txt');
+        if (!response.ok) {
+          throw new Error('Arquivo não encontrado');
+        }
         const text = await response.text();
-        const messages = text.split('\n').filter(line => line.trim() !== '');
+        const messages = text.split('\n')
+          .map(line => line.trim())
+          .filter(line => line.length > 0);
         return messages;
       } catch (error) {
-        console.error('Erro ao carregar mensagens:', error);
-        return [];
+        console.log('Usando mensagens padrão');
+        // Mensagens padrão caso o arquivo não carregue
+        return [
+          '🔥 João acabou de comprar o plano anual!',
+          '⚡ Maria ativou seu UniTV agora!',
+          '🎯 Pedro renovou por mais 90 dias!',
+          '🚀 Ana está assistindo há 2 horas!',
+          '💎 Carlos recomendou para 3 amigos!'
+        ];
       }
     }
+    
     function showPopup(message) {
       const popupContainer = document.getElementById('popup-container');
+      if (!popupContainer) return;
+      
       const popup = document.createElement('div');
       popup.className = 'popup';
-      popup.textContent = message;
+      
+      // Limpa qualquer HTML e usa apenas texto
+      popup.innerHTML = '';
+      popup.appendChild(document.createTextNode(message));
+      
       popupContainer.appendChild(popup);
       popup.style.display = 'block';
+      
+      // Remove o popup após 5 segundos
       setTimeout(() => {
-        popup.style.opacity = 0;
-        setTimeout(() => popup.remove(), 1200);
-      }, 4200);
+        popup.style.opacity = '0';
+        setTimeout(() => {
+          if (popup.parentNode) {
+            popup.parentNode.removeChild(popup);
+          }
+        }, 1000);
+      }, 4000);
     }
+    
     async function startPopupNotifications() {
       const messages = await loadMessages();
       if (messages.length === 0) return;
-      let displayedMessages = [];
-      let intervals = [1000, 1000, 3000, 3000, 7000];
-      function displayMessage() {
-        if (displayedMessages.length < messages.length) {
-          let randomIndex;
-          do {
-            randomIndex = Math.floor(Math.random() * messages.length);
-          } while (displayedMessages.includes(randomIndex));
-          showPopup(messages[randomIndex]);
-          displayedMessages.push(randomIndex);
-        }
+      
+      let messageIndex = 0;
+      
+      function displayNextMessage() {
+        if (messages.length === 0) return;
+        
+        showPopup(messages[messageIndex]);
+        messageIndex = (messageIndex + 1) % messages.length;
+        
+        // Próximo popup entre 8-15 segundos
+        const nextInterval = Math.random() * 7000 + 8000;
+        setTimeout(displayNextMessage, nextInterval);
       }
-      intervals.forEach((interval, index) => {
-        setTimeout(displayMessage, index * interval);
-      });
-      function scheduleNextMessage() {
-        if (displayedMessages.length < messages.length) {
-          let randomInterval = Math.random() * (60000 - 10000) + 10000;
-          setTimeout(() => {
-            displayMessage();
-            scheduleNextMessage();
-          }, randomInterval);
-        }
-      }
-      setTimeout(scheduleNextMessage, intervals.reduce((a, b) => a + b, 0));
+      
+      // Primeiro popup após 3 segundos
+      setTimeout(displayNextMessage, 3000);
     }
+    
     document.addEventListener('DOMContentLoaded', startPopupNotifications);
   </script>
-  <script>
-  // Timer de 15 minutos (900 segundos)
-  let ofertaSeconds = 15 * 60;
-  function updateOfertaTimer() {
-    const el = document.getElementById('oferta-timer-count');
-    let min = String(Math.floor(ofertaSeconds / 60)).padStart(2, '0');
-    let sec = String(ofertaSeconds % 60).padStart(2, '0');
-    el.textContent = `00:${min}:${sec}`;
-    if (ofertaSeconds > 0) {
-      ofertaSeconds--;
-      setTimeout(updateOfertaTimer, 1000);
-    } else {
-      // Quando acabar, pode esconder ou trocar texto
-      el.textContent = '00:00:00';
-      el.parentElement.querySelector('span:nth-child(2)').textContent = 'Oferta encerrada!';
-    }
-  }
-  document.addEventListener('DOMContentLoaded', updateOfertaTimer);</script><script>// abre o modaldocument.getElementById('btnAbrirModalTeste')
-  .addEventListener('click', () => {
-    const m = document.getElementById('modalTeste');
-    m.style.display = 'flex';});
-
-// redirecionamentosdocument.getElementById('testeUnitv')
-  .addEventListener('click', () => {
-    window.location.href = 'teste'; // UniTV: 3 dias});
-
-document.getElementById('testeTvexpress')
-  .addEventListener('click', () => {
-    window.location.href = 'teste2'; // TV Express: 7 dias});
-
-// fecha ao clicar fora da caixadocument.getElementById('modalTeste')
-  .addEventListener('click', e => {
-    if (e.target === e.currentTarget) {
-      e.currentTarget.style.display = 'none';
-    }});</script>
-
 </body>
 </html>
