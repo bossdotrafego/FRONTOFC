@@ -79,17 +79,15 @@
             const nome = document.getElementById('cli_nome').value;
             const email = document.getElementById('cli_email').value;
             
-            // --- MUDANÇAS AQUI ---
             const plano = "PLANO TRIMESTRAL 90 DIAS";
             const valor = 69.90;
-            // --- FIM DAS MUDANÇAS ---
 
             const submitButton = document.getElementById('btnGerar');
             submitButton.innerText = 'Gerando...';
             submitButton.disabled = true;
 
             try {
-                const response = await fetch('http://localhost:3000/api/gerar-pagamento', {
+                **const response = await fetch('https://unitv.onrender.com/api/gerar-pagamento', {**
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ nome, email, plano, valor })
