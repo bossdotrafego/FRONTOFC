@@ -3,6 +3,5 @@ services:
     name: recarga-front
     plan: free
     env: docker
-    # Diz ao serviço para usar o grupo de variáveis que criámos
-    envVarGroups:
-      - name: chaves-mercadopago
+    envVars:
+      - fromGroup: chaves-mercadopago
