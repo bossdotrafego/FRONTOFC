@@ -1,8 +1,9 @@
 services:
   - type: web
     name: recarga-front
-    runtime: php
     plan: free
-    rootDir: frontend
-    buildCommand: "composer install"
-    startCommand: "heroku-php-apache2"
+    # Diz ao Render para usar o ambiente Docker
+    env: docker
+    # Define as variáveis de ambiente (para a chave do Mercado Pago)
+    envVars:
+      - key: MERCADO_PAGO_ACCESS_TOKEN
