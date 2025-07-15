@@ -27,6 +27,9 @@
         #area-pix img { max-width: 250px; margin: 15px auto; display: block; }
         #pix-copia-cola { width: 100%; padding: 10px; font-family: monospace; text-align: center; margin-top: 10px; font-size: 0.9rem; }
         .hidden { display: none; }
+        .redirect-info { background: #e8f4fd; border: 2px solid #007bff; border-radius: 8px; padding: 15px; margin-top: 15px; }
+        .redirect-info h3 { color: #007bff; margin-bottom: 10px; }
+        .redirect-timer { font-size: 1.1rem; font-weight: bold; color: #007bff; }
     </style>
 </head>
 <body>
@@ -64,7 +67,14 @@
                     <img id="qr-code-img" src="" alt="QR Code PIX">
                     <p>Ou use o PIX Copia e Cola:</p>
                     <textarea id="pix-copia-cola" rows="4" readonly></textarea>
-                    <p><strong>Aguardando confirmação do pagamento...</strong></p>
+                    
+                    <div class="redirect-info">
+                        <h3>🎯 Aguardando pagamento...</h3>
+                        <p>Após o pagamento ser aprovado, você será redirecionado automaticamente para receber seu código UniTV!</p>
+                        <div class="redirect-timer">
+                            ⏱️ Verificando a cada <span id="timer">10</span> segundos
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -72,6 +82,8 @@
 
     <script>
         const form = document.getElementById('formCliente');
+        let idPagamento = null;
+        let intervaloPagamento = null;
 
         form.addEventListener('submit', async function(event) {
             event.preventDefault();
@@ -96,11 +108,20 @@
                 const data = await response.json();
 
                 if (data.sucesso) {
+                    // Esconder formulário e mostrar PIX
                     document.getElementById('secao-formulario').classList.add('hidden');
                     const areaPix = document.getElementById('area-pix');
                     areaPix.classList.remove('hidden');
+                    
+                    // Preencher dados do PIX
                     document.getElementById('qr-code-img').src = 'data:image/png;base64,' + data.qr_code_base64;
                     document.getElementById('pix-copia-cola').value = data.qr_code;
+                    
+                    // Guardar ID do pagamento
+                    idPagamento = data.id_pagamento;
+                    
+                    // Iniciar verificação automática
+                    iniciarVerificacaoPagamento();
                 } else {
                     alert('Erro ao gerar PIX: ' + data.erro);
                     submitButton.innerText = 'Gerar Pix';
@@ -113,6 +134,59 @@
                 submitButton.disabled = false;
             }
         });
+
+        function iniciarVerificacaoPagamento() {
+            let contador = 10;
+            const timerElement = document.getElementById('timer');
+            
+            // Verificar imediatamente
+            verificarStatusPagamento();
+            
+            // Depois verificar a cada 10 segundos
+            intervaloPagamento = setInterval(() => {
+                verificarStatusPagamento();
+                
+                // Atualizar contador visual
+                contador--;
+                if (contador <= 0) {
+                    contador = 10;
+                }
+                timerElement.textContent = contador;
+            }, 10000);
+            
+            // Atualizar contador visual a cada segundo
+            setInterval(() => {
+                contador--;
+                if (contador <= 0) {
+                    contador = 10;
+                }
+                timerElement.textContent = contador;
+            }, 1000);
+        }
+
+        async function verificarStatusPagamento() {
+            if (!idPagamento) return;
+            
+            try {
+                const response = await fetch('https://unitv.onrender.com/api/verificar-pagamento', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ id_pagamento: idPagamento })
+                });
+                
+                const data = await response.json();
+                
+                if (data.sucesso && data.status === 'approved' && data.codigo) {
+                    // Pagamento aprovado! Redirecionar para página de obrigado
+                    clearInterval(intervaloPagamento);
+                    window.location.href = `obrigado.html?id=${idPagamento}`;
+                }
+            } catch (error) {
+                console.error('Erro ao verificar pagamento:', error);
+            }
+        }
     </script>
 </body>
 </html>
