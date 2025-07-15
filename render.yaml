@@ -2,8 +2,7 @@ services:
   - type: web
     name: recarga-front
     plan: free
-    # Diz ao Render para usar o ambiente Docker
     env: docker
-    # Define as variáveis de ambiente (para a chave do Mercado Pago)
-    envVars:
-      - key: MERCADO_PAGO_ACCESS_TOKEN
+    # Diz ao serviço para usar o grupo de variáveis que criámos
+    envVarGroups:
+      - name: chaves-mercadopago
