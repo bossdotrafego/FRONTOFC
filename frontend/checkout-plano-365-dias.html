@@ -181,7 +181,7 @@
                 if (data.sucesso && data.status === 'approved' && data.codigo) {
                     // Pagamento aprovado! Redirecionar para página de obrigado
                     clearInterval(intervaloPagamento);
-                    window.location.href = `obrigado.html?id=${idPagamento}`;
+                    window.location.href = `https://unitv.onrender.com/obrigado.html?id=${idPagamento}`;
                 }
             } catch (error) {
                 console.error('Erro ao verificar pagamento:', error);
