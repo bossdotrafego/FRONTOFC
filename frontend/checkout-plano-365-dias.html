@@ -20,6 +20,8 @@
         .form-group label { display: block; margin-bottom: 4px; font-size: .9rem; color: var(--dark); }
         .form-group input { width: 100%; padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: var(--radius); transition: border-color .2s; }
         .form-group input:focus { outline: none; border-color: var(--red); }
+        .form-group input.error { border-color: #dc3545; }
+        .error-message { color: #dc3545; font-size: 0.85rem; margin-top: 4px; display: none; }
         .btn { width: 100%; padding: 12px; background: var(--red); color: #fff; border: none; border-radius: var(--radius); font-size: 1rem; margin-top: 10px; cursor: pointer; transition: opacity .2s; }
         .btn:disabled { background: #aaa; cursor: not-allowed; }
         .btn-copy { 
@@ -79,19 +81,17 @@
             </div>
             <div class="card-body">
                 <div id="secao-formulario">
-                    <h2 class="form-title">Dados Pessoais</h2>
+                    <h2 class="form-title">Dados para Entrega do Código</h2>
                     <form id="formCliente">
                         <div class="form-group">
                             <label for="cli_nome">Nome completo</label>
                             <input type="text" id="cli_nome" name="cli_nome" required placeholder="Seu nome completo">
+                            <div class="error-message" id="erro-nome">Nome é obrigatório</div>
                         </div>
                         <div class="form-group">
-                            <label for="cli_email">E-mail</label>
-                            <input type="email" id="cli_email" name="cli_email" required placeholder="seu@exemplo.com">
-                        </div>
-                        <div class="form-group">
-                            <label for="cli_cpf">CPF</label>
-                            <input type="text" id="cli_cpf" name="cli_cpf" required placeholder="000.000.000-00">
+                            <label for="cli_whatsapp">WhatsApp (com DDD)</label>
+                            <input type="tel" id="cli_whatsapp" name="cli_whatsapp" required placeholder="(11) 99999-9999">
+                            <div class="error-message" id="erro-whatsapp">WhatsApp deve ter 11 dígitos</div>
                         </div>
                         <button type="submit" class="btn" id="btnGerar">Gerar Pix</button>
                     </form>
@@ -114,7 +114,7 @@
                     
                     <div class="redirect-info">
                         <h3>🎯 Aguardando pagamento...</h3>
-                        <p>Após o pagamento ser aprovado, você será redirecionado automaticamente para receber seu código UniTV!</p>
+                        <p>Após o pagamento, você receberá seu código por <strong>WhatsApp</strong> e será redirecionado para a página de confirmação!</p>
                         <div class="redirect-timer">
                             ⏱️ Verificando a cada <span id="timer">10</span> segundos
                         </div>
@@ -129,11 +129,69 @@
         let idPagamento = null;
         let intervaloPagamento = null;
 
+        // Máscara para WhatsApp
+        const whatsappInput = document.getElementById('cli_whatsapp');
+        whatsappInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length <= 11) {
+                if (value.length >= 6) {
+                    value = value.replace(/^(\d{2})(\d{4,5})(\d{4})$/, '($1) $2-$3');
+                } else if (value.length >= 2) {
+                    value = value.replace(/^(\d{2})(\d+)/, '($1) $2');
+                }
+                e.target.value = value;
+            } else {
+                e.target.value = e.target.value.slice(0, -1);
+            }
+        });
+
+        // Validação de WhatsApp
+        function validarWhatsApp(whatsapp) {
+            const numeros = whatsapp.replace(/\D/g, '');
+            return numeros.length === 11 && numeros.charAt(2) === '9';
+        }
+
+        // Validação do formulário
+        function validarFormulario() {
+            const nome = document.getElementById('cli_nome').value.trim();
+            const whatsapp = document.getElementById('cli_whatsapp').value;
+            
+            let valido = true;
+
+            // Limpar erros anteriores
+            document.querySelectorAll('.form-group input').forEach(input => {
+                input.classList.remove('error');
+            });
+            document.querySelectorAll('.error-message').forEach(msg => {
+                msg.style.display = 'none';
+            });
+
+            // Validar nome
+            if (nome.length < 3) {
+                document.getElementById('cli_nome').classList.add('error');
+                document.getElementById('erro-nome').style.display = 'block';
+                valido = false;
+            }
+
+            // Validar WhatsApp
+            if (!validarWhatsApp(whatsapp)) {
+                document.getElementById('cli_whatsapp').classList.add('error');
+                document.getElementById('erro-whatsapp').style.display = 'block';
+                valido = false;
+            }
+
+            return valido;
+        }
+
         form.addEventListener('submit', async function(event) {
             event.preventDefault();
 
-            const nome = document.getElementById('cli_nome').value;
-            const email = document.getElementById('cli_email').value;
+            if (!validarFormulario()) {
+                return;
+            }
+
+            const nome = document.getElementById('cli_nome').value.trim();
+            const whatsapp = document.getElementById('cli_whatsapp').value.replace(/\D/g, ''); // Só números
             
             const plano = "PLANO ANUAL 365 DIAS";
             const valor = 161.90;
@@ -146,7 +204,7 @@
                 const response = await fetch('https://unitv.onrender.com/api/gerar-pagamento', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ nome, email, plano, valor })
+                    body: JSON.stringify({ nome, whatsapp, plano, valor })
                 });
 
                 const data = await response.json();
