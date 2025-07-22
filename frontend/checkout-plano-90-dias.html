@@ -22,6 +22,23 @@
         .form-group input:focus { outline: none; border-color: var(--red); }
         .btn { width: 100%; padding: 12px; background: var(--red); color: #fff; border: none; border-radius: var(--radius); font-size: 1rem; margin-top: 10px; cursor: pointer; transition: opacity .2s; }
         .btn:disabled { background: #aaa; cursor: not-allowed; }
+        .btn-copy { 
+            background: #28a745; 
+            margin-top: 15px; 
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-copy:hover { background: #218838; }
+        .btn-copy.copiado { 
+            background: #17a2b8; 
+            animation: pulse 0.6s ease-in-out;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
         #area-pix { text-align: center; }
         #area-pix h2 { margin-bottom: 10px; }
         #area-pix img { max-width: 250px; margin: 15px auto; display: block; }
@@ -30,6 +47,25 @@
         .redirect-info { background: #e8f4fd; border: 2px solid #007bff; border-radius: 8px; padding: 15px; margin-top: 15px; }
         .redirect-info h3 { color: #007bff; margin-bottom: 10px; }
         .redirect-timer { font-size: 1.1rem; font-weight: bold; color: #007bff; }
+        
+        /* Estilo para mensagem de sucesso */
+        .copy-success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 8px 12px;
+            border-radius: var(--radius);
+            margin-top: 10px;
+            font-size: 0.9rem;
+            animation: fadeInOut 3s ease-in-out;
+        }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(-10px); }
+            20% { opacity: 1; transform: translateY(0); }
+            80% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-10px); }
+        }
     </style>
 </head>
 <body>
@@ -67,6 +103,14 @@
                     <img id="qr-code-img" src="" alt="QR Code PIX">
                     <p>Ou use o PIX Copia e Cola:</p>
                     <textarea id="pix-copia-cola" rows="4" readonly></textarea>
+                    
+                    <button id="btn-copiar-pix" class="btn btn-copy">
+                        📋 COPIAR CÓDIGO PIX
+                    </button>
+                    
+                    <div id="copy-message" class="copy-success hidden">
+                        ✅ Código PIX copiado! Cole no seu app do banco para pagar.
+                    </div>
                     
                     <div class="redirect-info">
                         <h3>🎯 Aguardando pagamento...</h3>
@@ -120,6 +164,9 @@
                     // Guardar ID do pagamento
                     idPagamento = data.id_pagamento;
                     
+                    // Configurar botão de copiar
+                    configurarBotaoCopiar();
+                    
                     // Iniciar verificação automática
                     iniciarVerificacaoPagamento();
                 } else {
@@ -134,6 +181,65 @@
                 submitButton.disabled = false;
             }
         });
+
+        function configurarBotaoCopiar() {
+            const btnCopiar = document.getElementById('btn-copiar-pix');
+            const pixCopiaCola = document.getElementById('pix-copia-cola');
+            const copyMessage = document.getElementById('copy-message');
+
+            btnCopiar.addEventListener('click', async function() {
+                try {
+                    // Copiar para área de transferência
+                    await navigator.clipboard.writeText(pixCopiaCola.value);
+                    
+                    // Feedback visual no botão
+                    const textoOriginal = btnCopiar.textContent;
+                    btnCopiar.textContent = '✅ COPIADO!';
+                    btnCopiar.classList.add('copiado');
+                    
+                    // Mostrar mensagem de sucesso
+                    copyMessage.classList.remove('hidden');
+                    
+                    // Restaurar botão após 2 segundos
+                    setTimeout(() => {
+                        btnCopiar.textContent = textoOriginal;
+                        btnCopiar.classList.remove('copiado');
+                    }, 2000);
+                    
+                    // Esconder mensagem após 3 segundos
+                    setTimeout(() => {
+                        copyMessage.classList.add('hidden');
+                    }, 3000);
+                    
+                } catch (err) {
+                    // Fallback para navegadores que não suportam clipboard API
+                    pixCopiaCola.select();
+                    pixCopiaCola.setSelectionRange(0, 99999); // Para mobile
+                    
+                    try {
+                        document.execCommand('copy');
+                        
+                        const textoOriginal = btnCopiar.textContent;
+                        btnCopiar.textContent = '✅ COPIADO!';
+                        btnCopiar.classList.add('copiado');
+                        
+                        copyMessage.classList.remove('hidden');
+                        
+                        setTimeout(() => {
+                            btnCopiar.textContent = textoOriginal;
+                            btnCopiar.classList.remove('copiado');
+                        }, 2000);
+                        
+                        setTimeout(() => {
+                            copyMessage.classList.add('hidden');
+                        }, 3000);
+                        
+                    } catch (fallbackErr) {
+                        alert('Não foi possível copiar automaticamente. Por favor, selecione e copie o código manualmente.');
+                    }
+                }
+            });
+        }
 
         function iniciarVerificacaoPagamento() {
             let contador = 10;
